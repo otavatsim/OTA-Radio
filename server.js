@@ -1,4 +1,3 @@
-// server.js
 const express = require("express");
 const http = require("http");
 const WebSocket = require("ws");
@@ -17,16 +16,16 @@ if (!fs.existsSync(DATA_PATH)) fs.mkdirSync(DATA_PATH);
 
 const CONFIG_FILE = path.join(DATA_PATH, "config.json");
 
-// Serve a simple health check
+// Health check
 app.get("/", (req, res) => {
-  res.send("Backend server is running!");
+  res.send("OTA Radio backend is running!");
 });
 
 // WebSocket handling
 wss.on("connection", (ws) => {
   console.log("New client connected");
 
-  // Send saved username to client on connect
+  // Send saved username if exists
   let username = "Guest";
   if (fs.existsSync(CONFIG_FILE)) {
     const config = JSON.parse(fs.readFileSync(CONFIG_FILE));
@@ -34,7 +33,7 @@ wss.on("connection", (ws) => {
   }
   ws.send(JSON.stringify({ type: "username", username }));
 
-  // Broadcast incoming messages to all clients
+  // Handle incoming messages
   ws.on("message", (message) => {
     try {
       const data = JSON.parse(message);
@@ -67,7 +66,6 @@ wss.on("connection", (ws) => {
   });
 });
 
-// Start the server
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
