@@ -1,13 +1,13 @@
-services:
-  - type: web
-    name: electron-chat-backend
-    env: node
-    region: oregon
-    plan: free
-    branch: main
-    buildCommand: npm install
-    startCommand: node server.js
-    autoDeploy: true
-    envVars:
-      - key: NODE_ENV
-        value: production
+app:
+  name: electron-chat-backend
+  type: web
+  env: node
+  region: oregon
+  branch: main
+  buildCommand: npm install
+  startCommand: node server.js
+  autoDeploy: true
+  plan: free
+  envVars:
+    - key: NODE_ENV
+      value: production
