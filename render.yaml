@@ -1,13 +1,13 @@
 app:
-  name: electron-chat-backend
+  name: ota-radio-backend
   type: web
   env: node
   region: oregon
+  plan: free
   branch: main
   buildCommand: npm install
-  startCommand: node server.js
+  startCommand: npm start
   autoDeploy: true
-  plan: free
   envVars:
     - key: NODE_ENV
       value: production
