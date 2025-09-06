@@ -1,22 +1,15 @@
-app:
-  name: ElectronChatApp
-  version: 1.0.0
-  main: main.js
-  windows:
-    - name: setup
-      file: setup.html
-      width: 400
-      height: 250
-      resizable: false
-      alwaysOnTop: true
-    - name: main
-      file: index.html
-      width: 600
-      height: 500
-      resizable: true
-      alwaysOnTop: true
-  userDataPath: userData
-  configFile: config.json
-  ipcChannels:
-    - save-username
-    - get-username
+services:
+  - type: web
+    name: electron-chat-backend
+    env: node
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: npm install
+    startCommand: node server.js
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
